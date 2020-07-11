@@ -88,15 +88,32 @@ class FlaskrTestCase(unittest.TestCase):
 
     def test_delete_message(self):
         """Ensure the messages are being deleted"""
-        rv = self.app.get('/delete/1')
+        delete_query = '/delete/1'
+        # Logged out
+        rv = self.app.get(delete_query)
+        data = json.loads(rv.data.decode('utf-8'))
+        self.assertEqual(data['status'], 0)
+        # Logged in
+        self.login(app.config['USERNAME'], app.config['PASSWORD'])
+        rv = self.app.get(delete_query)
         data = json.loads(rv.data.decode('utf-8'))
         self.assertEqual(data['status'], 1)
+
+
 
     def test_search(self):
         """Make sure the search page is displayed"""
         tester = app.test_client(self)
         response = tester.get('/search/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
+
+    def test_login_required(self):
+        """Make sure login required is working"""
+        tester = app.test_client(self)
+        response = tester.get('/delete/1')
+
+        assert response.status_code == 401
+
 
 if __name__ == '__main__':
     unittest.main()
