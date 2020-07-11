@@ -7,6 +7,7 @@ from app import app, db
 TEST_DB = "test.db"
 
 
+# Simple Commit to test a force push
 class BasicTestCase(unittest.TestCase):
     def test_index(self):
         """Initial test: Ensure flask was set up correctly"""
