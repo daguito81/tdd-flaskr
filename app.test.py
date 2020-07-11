@@ -92,6 +92,11 @@ class FlaskrTestCase(unittest.TestCase):
         data = json.loads(rv.data.decode('utf-8'))
         self.assertEqual(data['status'], 1)
 
+    def test_search(self):
+        """Make sure the search page is displayed"""
+        tester = app.test_client(self)
+        response = tester.get('/search/', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()

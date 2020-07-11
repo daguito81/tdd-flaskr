@@ -84,6 +84,17 @@ def delete_entry(post_id):
         result = {'status': 0, 'message': repr(e)}
     return jsonify(result)
 
+@app.route('/search/', methods=['GET'])
+def search():
+    query = request.args.get("query")
+    print(query)
+    entries = db.session.query(models.Flaskr)
+    print(entries)
+    if query:
+        return render_template('search.html', entries=entries, query=query)
+    else:
+        return render_template('search.html')
+
 
 if __name__ == '__main__':
     app.run()
