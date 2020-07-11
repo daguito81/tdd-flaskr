@@ -8,17 +8,15 @@ from functools import wraps
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # configuration
-DATABASE = 'flaskr.db'
-DEBUG = True
 SECRET_KEY = 'my_precious'
 USERNAME = 'admin'
 PASSWORD = 'admin'
 
-# Define full path for the database
-DATABASE_PATH = os.path.join(basedir, DATABASE)
-
 # Database config
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
+SQLALCHEMY_DATABASE_URI = os.getenv(
+    'DATABASE_URL',
+    f'sqlite:///{os.path.join(basedir, "flaskr.db")}'
+)
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Create app
