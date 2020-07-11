@@ -1,6 +1,7 @@
 from app import db
 
 
+# Test commit for github actions
 class Flaskr(db.Model):
     __tablename__ = "flaskr"
 
