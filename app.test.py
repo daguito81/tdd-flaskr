@@ -100,7 +100,7 @@ class FlaskrTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get("/delete/1")
 
-        assert response.status_code == 402
+        assert response.status_code == 401
 
 
 if __name__ == "__main__":
