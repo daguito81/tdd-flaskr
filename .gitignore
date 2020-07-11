@@ -5,4 +5,4 @@ env
 __pycache__
 .idea
 test.db
-!/flaskr.db
+flaskr.db
